@@ -14,9 +14,9 @@ import com.autorentalapp.models.User;
 @Repository
 public class UserRepository {
 
-	private String GET_USER_QUERY = "SELECT * FROM AUTORENTAL.USERS";
+	private String GET_USER_QUERY = "SELECT * FROM RENTALAPP.USER";
 	
-	private String ADD_USER = "INSERT INTO AUTORENTAL.USERS(name,password) VALUES(?,?)";
+	private String ADD_USER = "INSERT INTO RENTALAPP.USER(firstname,lastname,email,password,phonenumber,age,drivinglicense) VALUES(?,?,?,?,?,?,?)";
 	
 	private RowMapper<User>  rowMapper =  new RowMapper<User>() {
 
@@ -25,8 +25,13 @@ public class UserRepository {
 			// TODO Auto-generated method stub
 			User user = new User();
 			user.setId(rs.getInt(1));
-			user.setName(rs.getString(2));
-			user.setPassword(rs.getString(3));
+			user.setFirstname(rs.getString(2));
+			user.setLastname(rs.getString(3));
+			user.setEmail(rs.getString(4));
+			user.setPassword(rs.getString(5));
+			user.setPhonenumber(rs.getString(6));
+			user.setAge(rs.getInt(7));
+			user.setDrivinglicense(rs.getString(8));
 			System.out.println(user.toString());
 			return user;
 		}
@@ -49,7 +54,9 @@ public class UserRepository {
 	public User registerUser(User user) {
 		
 		
-		int executeResult = jdbcTemplate.update(ADD_USER, new Object[] {user.getName(), user.getPassword()});
+		int executeResult = jdbcTemplate.update(ADD_USER, 
+				new Object[] {user.getFirstname(), user.getLastname(), user.getEmail(), user.getPassword(),
+						user.getPhonenumber(),user.getAge(),user.getDrivinglicense()});
 		if (executeResult > 0) {
 			return user;
 		}
