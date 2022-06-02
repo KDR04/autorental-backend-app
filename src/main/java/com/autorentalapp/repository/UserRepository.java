@@ -14,9 +14,9 @@ import com.autorentalapp.models.User;
 @Repository
 public class UserRepository {
 
-	private String GET_USER_QUERY = "SELECT * FROM RENTALAPP.USER";
+	private String GET_USER_QUERY = "SELECT * FROM RENTALAPP.USERS";
 	
-	private String ADD_USER = "INSERT INTO RENTALAPP.USER(firstname,lastname,email,password,phonenumber,age,drivinglicense) VALUES(?,?,?,?,?,?,?)";
+	private String ADD_USER = "INSERT INTO RENTALAPP.USERS(firstname,lastname,email,password,phonenumber,age,drivinglicense) VALUES(?,?,?,?,?,?,?)";
 	
 	private RowMapper<User>  rowMapper =  new RowMapper<User>() {
 
@@ -41,7 +41,7 @@ public class UserRepository {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	public UserRepository() {
+	public UserRepository(JdbcTemplate jdbcTemplate) {
 		// TODO Auto-generated constructor stub
 		this.jdbcTemplate = jdbcTemplate;
 	}

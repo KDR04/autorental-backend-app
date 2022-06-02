@@ -51,7 +51,7 @@ public class UserController {
 	@PostMapping("v1/userLogin")
 	public  ResponseEntity<Boolean> userLogin(@RequestBody User user) {
 		System.out.println("comes here in login post");
-		System.out.println(user.toString());
+//		System.out.println(user.toString());
 		Boolean userOutput = userService.userLogin(user);
 		if (Objects.nonNull(userOutput)) {
 			return new ResponseEntity<>(userOutput, HttpStatus.OK);
